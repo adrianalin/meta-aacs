@@ -1,0 +1,21 @@
+AACS image
+==========
+
+In order to build the aacs-image (only for Raspberry Pi4):
+* bitbake aacs-image
+* flash the generated image build/tmp/deploy/images/raspberrypi4-64/aacs-image-raspberrypi4-64.wic.bz2: sudo bmaptool copy --nobmap aacs-image-raspberrypi4-64.wic.bz2 /dev/sdX (replace X with SD card device letter)
+* run openauto on laptop:
+	- git://github.com/opencardev/aasdk.git branch=development
+	- git://github.com/matt2005/openauto.git branch=yocto
+* Raspberry Pi4 connects to laptop via USB C cable which is both power and data.
+* On Raspberry Pi4 just run AAServer. openauto app must be running on laptop.
+* The test video pattern should be displayed on laptop openauto app.
+
+
+Please see the corresponding sections below for details.
+
+Dependencies
+============
+
+  URI: git://git.openembedded.org/meta-openembedded
+  branch: dunfell

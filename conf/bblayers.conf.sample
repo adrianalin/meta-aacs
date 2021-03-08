@@ -1,0 +1,19 @@
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  ${HOME}/yocto/poky-dunfell/meta \
+  ${HOME}/yocto/poky-dunfell/meta-poky \
+  ${HOME}/yocto/poky-dunfell/meta-openembedded/meta-oe \
+  ${HOME}/yocto/poky-dunfell/meta-openembedded/meta-multimedia \
+  ${HOME}/yocto/poky-dunfell/meta-openembedded/meta-networking \
+  ${HOME}/yocto/poky-dunfell/meta-openembedded/meta-perl \
+  ${HOME}/yocto/poky-dunfell/meta-openembedded/meta-python \
+  ${HOME}/yocto/poky-dunfell/meta-raspberrypi \
+  ${HOME}/yocto/poky-dunfell/meta-security \
+  ${HOME}/yocto/poky-dunfell/meta-aacs \
+"
