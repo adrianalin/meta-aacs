@@ -5,8 +5,7 @@ Subject: [PATCH] Fix yocto build error.
 
 ---
  AAServer/include/InputChannelHandler.h | 1 +
- CMakeLists.txt                         | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ 1 files changed, 1 insertions(+), 0 deletion(-)
 
 diff --git a/AAServer/include/InputChannelHandler.h b/AAServer/include/InputChannelHandler.h
 index 0b44d8f..93e9f88 100644
@@ -20,13 +19,3 @@ index 0b44d8f..93e9f88 100644
  
  class InputChannelHandler : public ChannelHandler {
    void sendHandshakeRequest();
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7b6d1fc..3b6c27c 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -5,4 +5,4 @@ add_subdirectory(external/backward-cpp)
- add_subdirectory(AAServer)
- add_subdirectory(AAClient)
- add_subdirectory(AAVideoSink)
--add_subdirectory(GetEvents)
-+# add_subdirectory(GetEvents)

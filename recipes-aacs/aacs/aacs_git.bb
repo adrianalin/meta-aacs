@@ -7,9 +7,9 @@ SRC_URI = "gitsm://github.com/tomasz-grobelny/AACS.git;protocol=https;branch=mas
            "
 SRCREV = "master"
 
-DEPENDS += " protobuf protobuf-native boost libusbgx libusb libpcap gstreamer1.0 fmt"
+DEPENDS += " protobuf protobuf-native boost libusbgx libusb libpcap gstreamer1.0 fmt libxtst elfutils"
 
-RDEPENDS_${PN} += " protobuf boost libusbgx libpcap gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly fmt"
+RDEPENDS_${PN} += " protobuf boost libusbgx libpcap gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly fmt libxtst elfutils"
 
 inherit cmake
 
@@ -23,6 +23,8 @@ do_install_append() {
 	install -d ${D}${bindir}
 	install -d ${D}/home/root
 	install -m 0755 ${S}/../build/AAServer/AAServer ${D}${bindir}
+	install -m 0755 ${S}/../build/AAClient/AAClient ${D}${bindir}
+	install -m 0755 ${S}/../build/GetEvents/GetEvents ${D}${bindir}
 
 	# Install systemd related configuration file
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then

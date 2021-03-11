@@ -8,8 +8,13 @@ In order to build the aacs-image (only for Raspberry Pi4):
 	- git://github.com/opencardev/aasdk.git branch=development
 	- git://github.com/matt2005/openauto.git branch=yocto
 * Raspberry Pi4 connects to laptop via USB C cable which is both power and data.
-* On Raspberry Pi4 just run AAServer. openauto app must be running on laptop.
-* The test video pattern should be displayed on laptop openauto app.
+* Run openauto on laptop (acts as the head unit of the car).
+* On Raspberry Pi4 (acts as the android mobile end):
+	# cd /home/root
+	* start `AAServer`; acts as the android mobile; you should see the video pattern showing up on laptop
+	# AAServer &
+	* start `GetEvents`; communicates with the `AAServer` (via named socket `socket`), opens a new communication channel to receive `touch` events from the head unit and forwards them to existing window called `Terminal` (check the logs)
+	# GetEvents socket Terminal &
 
 
 Please see the corresponding sections below for details.
@@ -17,5 +22,7 @@ Please see the corresponding sections below for details.
 Dependencies
 ============
 
-  URI: git://git.openembedded.org/meta-openembedded
+  git://git.yoctoproject.org/poky
+  branch: dunfell
+  https://github.com/agherzan/meta-raspberrypi.git
   branch: dunfell
