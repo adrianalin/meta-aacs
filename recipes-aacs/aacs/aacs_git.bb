@@ -26,9 +26,9 @@ do_install_append() {
 	install -d ${D}/home/root/AAClient
 	install -d ${D}${sysconfdir}/udev/rules.d/
 
-	install -m 0755 ${S}/oe-workdir/aacs-git/AAServer/AAServer ${D}${bindir}
-	install -m 0755 ${S}/oe-workdir/aacs-git/AAClient/AAClient ${D}${bindir}
-	install -m 0755 ${S}/oe-workdir/aacs-git/GetEvents/GetEvents ${D}${bindir}
+	install -m 0755 ${S}/../build/AAServer/AAServer ${D}${bindir}
+	install -m 0755 ${S}/../build/AAClient/AAClient ${D}${bindir}
+	install -m 0755 ${S}/../build/GetEvents/GetEvents ${D}${bindir}
 
 	# Install systemd related configuration file
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
