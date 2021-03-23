@@ -9,7 +9,7 @@ SRCREV = "master"
 
 DEPENDS += " protobuf protobuf-native boost libusbgx libusb libpcap gstreamer1.0 fmt libxtst elfutils"
 
-RDEPENDS_${PN} += " protobuf boost libusbgx libpcap gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly fmt libxtst elfutils"
+RDEPENDS_${PN} += " protobuf boost libusbgx libpcap gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly fmt libxtst elfutils gstreamer1.0-libav"
 
 inherit cmake
 
@@ -25,9 +25,10 @@ do_install_append() {
 	install -d ${D}/home/root/AAServer
 	install -d ${D}/home/root/AAClient
 	install -d ${D}${sysconfdir}/udev/rules.d/
-	install -m 0755 ${S}/../build/AAServer/AAServer ${D}${bindir}
-	install -m 0755 ${S}/../build/AAClient/AAClient ${D}${bindir}
-	install -m 0755 ${S}/../build/GetEvents/GetEvents ${D}${bindir}
+
+	install -m 0755 ${S}/oe-workdir/aacs-git/AAServer/AAServer ${D}${bindir}
+	install -m 0755 ${S}/oe-workdir/aacs-git/AAClient/AAClient ${D}${bindir}
+	install -m 0755 ${S}/oe-workdir/aacs-git/GetEvents/GetEvents ${D}${bindir}
 
 	# Install systemd related configuration file
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then

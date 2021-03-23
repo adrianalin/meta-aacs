@@ -14,7 +14,8 @@ In order to build the aacs-image (only for Raspberry Pi4):
 	* start `AAServer`; acts as the android mobile; you should see the video pattern showing up on laptop
 	# AAServer &
 	* start `GetEvents`; communicates with the `AAServer` (via named socket `socket`), opens a new communication channel to receive `touch` events from the head unit and forwards them to existing window called `Terminal` (check the logs)
-	# GetEvents socket Terminal &
+	# GetEvents socket Terminal
+	# start `AAClient socket` where socket is the socket name that `AAServer opened`. Don't forget to conect your Android phone via USB to device.
 
 
 Please see the corresponding sections below for details.
