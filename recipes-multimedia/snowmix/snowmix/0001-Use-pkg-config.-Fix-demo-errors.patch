@@ -1,0 +1,86 @@
+From ad9e05c61586c25ec395d67f218889b74b126084 Mon Sep 17 00:00:00 2001
+From: Adrian Pop <pop.adrian61@gmail.com>
+Date: Sun, 21 Mar 2021 19:41:24 +0000
+Subject: [PATCH] Use pkg-config. Fix demo errors.
+
+---
+ configure.ac       | 8 ++++----
+ scripts/demo       | 3 ++-
+ scripts/input2feed | 2 +-
+ scripts/rtsp2feed  | 2 +-
+ scripts/rtsp2feed2 | 2 +-
+ 5 files changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index bee6392..3fd9755 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -147,11 +147,11 @@ AC_SUBST(MMAN_H)
+ # SDL
+ dnl Get SDL cflags and SDL libraries to include
+ AC_CHECK_HEADER(SDL.h,
+-  SDL_LIBS="`sdl-config --libs` "
+-  SDL_CFLAGS="`sdl-config --cflags` ",
++  SDL_LIBS="`pkg-config --libs sdl` "
++  SDL_CFLAGS="`pkg-config --cflags sdl` ",
+   [AC_CHECK_HEADER(SDL/SDL.h,
+-    SDL_LIBS="`sdl-config --libs` "
+-    SDL_CFLAGS="`sdl-config --cflags` ",
++    SDL_LIBS="`pkg-config --libs sdl` "
++    SDL_CFLAGS="`pkg-config --cflags sdl` ",
+     [AC_MSG_ERROR([Could not find SDL.h. SDL is essential for building Snowmix.])]
+   )]
+ )
+diff --git a/scripts/demo b/scripts/demo
+index b5d2c10..e3d2c2b 100755
+--- a/scripts/demo
++++ b/scripts/demo
+@@ -1,7 +1,8 @@
+ #!/bin/bash
+ 
++export SNOWMIX=/usr/lib/Snowmix-0.5.1.1
+ # Check for SNOWMIX variable and the snowmix and gstreamer settings
+-if [ "X$SNOWMIX" = X -o ! -d $SNOWMIX ] ; then
++if [[ -z "${SNOWMIX}" ]]; then
+   echo "You need to se the environment variable SNOWMIX to the base of the Snowmix directory"
+   exit 1
+ fi
+diff --git a/scripts/input2feed b/scripts/input2feed
+index b9f2851..e564b42 100755
+--- a/scripts/input2feed
++++ b/scripts/input2feed
+@@ -87,7 +87,7 @@ else
+ fi
+ 
+ SRC="filesrc location=$source ! $decodebin name=decoder ! $VIDEOCONVERT "
+-SHMSIZE='shm-size='`echo "$feed_width * $feed_height * 4 * 26"|bc`
++SHMSIZE="shm-size=$((feed_width * feed_height * 4 * 26))"
+ SHMOPTION="wait-for-connection=1 sync=true"
+ SHMSINK1="shmsink socket-path=$feed_control_pipe $SHMSIZE $SHMOPTION"
+ #SCALE="$VIDEOCONVERT ! videoscale ! $VIDEOCONVERT"
+diff --git a/scripts/rtsp2feed b/scripts/rtsp2feed
+index ce4a17e..a6dd887 100755
+--- a/scripts/rtsp2feed
++++ b/scripts/rtsp2feed
+@@ -75,7 +75,7 @@ SRC="rtspsrc location=$location protocols=$protocol latency=$latency ! decodebin
+ SRC="uridecodebin uri=$location name=decoder"
+ 
+ # Settings for shmsink
+-SHMSIZE='shm-size='`echo "$feed_width * $feed_height * 4 * 20"|bc`
++SHMSIZE="shm-size=$((feed_width * feed_height * 4 * 26))"
+ SHMOPTION="wait-for-connection=0 sync=true"
+ SHMSINK1="shmsink socket-path=$feed_control_pipe $SHMSIZE $SHMOPTION"
+ src_type=`echo $SRC | cut -f1 -d' '`
+diff --git a/scripts/rtsp2feed2 b/scripts/rtsp2feed2
+index f1290d0..1af3fc5 100755
+--- a/scripts/rtsp2feed2
++++ b/scripts/rtsp2feed2
+@@ -79,7 +79,7 @@ SRC="rtspsrc location=$location protocols=$protocol latency=$latency ! decodebin
+ SRC="uridecodebin uri=$location name=decoder"
+ 
+ # Settings for shmsink
+-SHMSIZE='shm-size='`echo "$feed_width * $feed_height * 4 * 20"|bc`
++SHMSIZE="shm-size=$((feed_width * feed_height * 4 * 26))"
+ SHMOPTION="wait-for-connection=0 sync=true"
+ SHMSINK1="shmsink socket-path=$feed_control_pipe $SHMSIZE $SHMOPTION"
+ src_type=`echo $SRC | cut -f1 -d' '`
