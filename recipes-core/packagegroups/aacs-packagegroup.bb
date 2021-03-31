@@ -33,6 +33,7 @@ RDEPENDS_${PN} = " \
 	sudo \
 	aacs \
 	strace \
+	electron \
 	snowmix \
 "
 
