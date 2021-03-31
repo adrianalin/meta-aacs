@@ -33,6 +33,7 @@ RDEPENDS_${PN} = " \
 	sudo \
 	aacs \
 	strace \
+	snowmix \
 "
 
 INSANE_SKIP_${PN} = "dev-deps"
