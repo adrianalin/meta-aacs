@@ -1,7 +1,7 @@
 AACS image
 ==========
 
-In order to build the aacs-image (only for Raspberry Pi4):
+In order to build the aacs-image (only for Raspberry Pi4 - has USB OTG controller):
 * bitbake aacs-image
 * flash the generated image build/tmp/deploy/images/raspberrypi4-64/aacs-image-raspberrypi4-64.wic.bz2: sudo bmaptool copy --nobmap aacs-image-raspberrypi4-64.wic.bz2 /dev/sdX (replace X with SD card device letter)
 * run openauto on laptop:
@@ -24,6 +24,6 @@ Dependencies
 ============
 
   git://git.yoctoproject.org/poky
-  branch: dunfell
+  branch: hardknott
   https://github.com/agherzan/meta-raspberrypi.git
-  branch: dunfell
+  branch: hardknott
