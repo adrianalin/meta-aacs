@@ -7,7 +7,7 @@ SRC_URI = "gitsm://github.com/tomasz-grobelny/AACS.git;protocol=https;branch=mas
            "
 SRCREV = "master"
 
-DEPENDS += " protobuf protobuf-native boost libusbgx libusb libpcap gstreamer1.0 fmt libxtst elfutils"
+DEPENDS += " protobuf protobuf-native boost libusbgx libusb libpcap gstreamer1.0 fmt libxtst elfutils snowmix"
 
 RDEPENDS_${PN} += " protobuf boost libusbgx libpcap gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly fmt libxtst elfutils gstreamer1.0-libav"
 
